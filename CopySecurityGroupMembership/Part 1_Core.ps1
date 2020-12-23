@@ -1,12 +1,10 @@
-# assign user SAM account names to variables
-$ReferenceUserSAM = 'michelle.adams'
-$TargetUserSAM = 'paul.allen'
-
 # Gets User information including the MemberOf property
-$ReferenceUser = Get-ADUser -Identity $ReferenceUserSAM -Properties MemberOf
+$ReferenceUser = Get-ADUser -Identity michelle.adams -Properties MemberOf
 
-# assigning only the groups to variable
+# Isolate the groups
 $SelectedGroups = $ReferenceUser.MemberOf
 
-# Adds groups to TargetUser
-$SelectedGroups | Add-ADGroupMember -Members $TargetUserSAM
+# Adds TargetUser to groups
+$SelectedGroups | Add-ADGroupMember -Members paul.allen
+
+
