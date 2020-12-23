@@ -1,0 +1,957 @@
+1
+00:00:00,242 --> 00:00:03,336
+Hello and welcome to <b>Part 1</b> of the video series
+
+2
+00:00:03,492 --> 00:00:06,352
+where we write a PowerShell script that automates the process
+
+3
+00:00:06,377 --> 00:00:08,687
+of adding a new Active Directory user
+
+4
+00:00:08,758 --> 00:00:11,312
+to all of the groups of an existing user.
+
+5
+00:00:13,270 --> 00:00:16,114
+This is what our script will look like at the end of the video.
+
+6
+00:00:16,161 --> 00:00:17,996
+It's only three lines of code,
+
+7
+00:00:18,184 --> 00:00:21,505
+but that little bit will save you time and energy in the future.
+
+8
+00:00:24,747 --> 00:00:26,833
+We'll begin by creating a new file
+
+9
+00:00:26,856 --> 00:00:30,051
+and saving it with a .ps1 file extension.
+
+10
+00:00:33,661 --> 00:00:36,434
+I'll keep the finished version on the left side
+
+11
+00:00:36,466 --> 00:00:38,778
+so we can following along as we write the script.
+
+12
+00:00:42,419 --> 00:00:44,051
+Whenever I write a script,
+
+13
+00:00:44,512 --> 00:00:46,684
+way before I even start writing any code,
+
+14
+00:00:46,716 --> 00:00:50,145
+I like to map out the logical progression that the script will follow.
+
+15
+00:00:50,497 --> 00:00:52,457
+I'll do this in the form of comments
+
+16
+00:00:52,496 --> 00:00:54,035
+which start with a '#'.
+
+17
+00:00:54,981 --> 00:00:56,692
+Everything after the '#'
+
+18
+00:00:56,717 --> 00:00:58,372
+will not be run by PowerShell
+
+19
+00:00:58,397 --> 00:01:00,488
+and is used for any notes, reminders,
+
+20
+00:01:00,513 --> 00:01:02,286
+or explanations that you'd want to put in.
+
+21
+00:01:02,669 --> 00:01:05,216
+For this script, it's a three-step process:
+
+22
+00:01:06,919 --> 00:01:11,044
+1. Get the reference user along with group memberships
+
+23
+00:01:12,184 --> 00:01:16,559
+2. Isolate the group identities from the reference user
+
+24
+00:01:17,520 --> 00:01:21,012
+3. Add the new user to those groups
+
+25
+00:01:23,544 --> 00:01:26,708
+First, I'll explain how to use the <u>Get-ADUser</u> command
+
+26
+00:01:26,733 --> 00:01:29,137
+to get information about the reference user
+
+27
+00:01:29,208 --> 00:01:31,137
+and the groups that she is a member of.
+
+28
+00:01:32,645 --> 00:01:35,591
+If we just run the <u>Get-ADUser</u> command by itself,
+
+29
+00:01:35,747 --> 00:01:39,630
+PowerShell won't know from which user to get the information for
+
+30
+00:01:39,655 --> 00:01:41,225
+and the command won't work.
+
+31
+00:01:41,395 --> 00:01:44,997
+We want to identify <i>Michelle</i> as the user to get.
+
+32
+00:01:46,551 --> 00:01:48,512
+To identify Michelle as the user,
+
+33
+00:01:48,551 --> 00:01:50,786
+we'll use the <u>-Identity</u> parameter.
+
+34
+00:01:51,395 --> 00:01:54,341
+Parameters are extra bits of information
+
+35
+00:01:54,366 --> 00:01:56,028
+that you're adding to the command
+
+36
+00:01:56,053 --> 00:01:58,361
+to narrow the scope or help specify the task
+
+37
+00:01:58,386 --> 00:02:00,336
+that you're telling PowerShell to do
+
+38
+00:02:00,662 --> 00:02:02,686
+and they always start with a dash ( - ).
+
+39
+00:02:04,871 --> 00:02:07,179
+<u>Get-ADUser</u> has many parameters
+
+40
+00:02:07,204 --> 00:02:09,708
+and I may show those later in some other videos,
+
+41
+00:02:09,907 --> 00:02:14,041
+but for now, I'm only going to be concerned with the <u>-Identity</u> parameter.
+
+42
+00:02:14,254 --> 00:02:15,958
+The command is going to look like:
+
+43
+00:02:15,994 --> 00:02:22,016
+Get-ADUser -Identity <i>USER</i>
+
+44
+00:02:24,282 --> 00:02:27,265
+<i>USER</i> can be identified by:
+
+45
+00:02:27,308 --> 00:02:29,268
+Distinguished Name
+
+46
+00:02:29,573 --> 00:02:31,512
+Globally Unique Identifier
+
+47
+00:02:31,537 --> 00:02:33,416
+the Security Identifier
+
+48
+00:02:33,522 --> 00:02:35,070
+or the SAM Account Name
+
+49
+00:02:35,852 --> 00:02:38,139
+I, personally, like to use the SAM account name
+
+50
+00:02:38,164 --> 00:02:40,319
+because it's almost universally accepted
+
+51
+00:02:40,344 --> 00:02:41,725
+in PowerShell commands,
+
+52
+00:02:41,960 --> 00:02:44,737
+and it's usually short and easy to remember.
+
+53
+00:02:47,698 --> 00:02:51,767
+The SAM account name can be found in Active Directory Users and Computers.
+
+54
+00:02:51,974 --> 00:02:55,213
+Now, I've heard it pronounced A-D-U-C,
+
+55
+00:02:55,238 --> 00:02:57,215
+Ay-duck, or a duck,
+
+56
+00:02:57,301 --> 00:02:59,814
+but saying that we're going to look for Michelle
+
+57
+00:02:59,839 --> 00:03:02,407
+inside a duck just sounds kind of silly,
+
+58
+00:03:02,457 --> 00:03:05,078
+so I'm just going to pronounce it "A-D-U-C"
+
+59
+00:03:06,016 --> 00:03:08,991
+The SAM account name can be found
+
+60
+00:03:09,016 --> 00:03:10,696
+by double-clicking on the user,
+
+61
+00:03:10,831 --> 00:03:13,140
+selecting the <u>Account</u> tab,
+
+62
+00:03:13,282 --> 00:03:18,140
+and it'll be under <u>User Logon Name (Pre-Windows 2000)</u>.
+
+63
+00:03:20,498 --> 00:03:24,120
+You can find each of the other identifiers in ADUC
+
+64
+00:03:24,145 --> 00:03:26,250
+by going to the toolbar at the top,
+
+65
+00:03:26,385 --> 00:03:29,816
+clicking on <u>View</u>, and ensure <u>Advanced Features</u> are enabled.
+
+66
+00:03:30,512 --> 00:03:32,550
+Then double-click on the user
+
+67
+00:03:32,586 --> 00:03:34,546
+and select the <u>Attribute Editor</u> tab.
+
+68
+00:03:38,552 --> 00:03:42,188
+Now that we've got the correct identity of our example user, Michelle,
+
+69
+00:03:42,323 --> 00:03:43,978
+we're ready to use the command.
+
+70
+00:03:45,363 --> 00:03:46,442
+So we'll type in:
+
+71
+00:03:46,467 --> 00:03:50,377
+<u>Get-ADUser -Identity michelle.adams</u>
+
+72
+00:03:54,326 --> 00:03:56,733
+By default, the <u>Get-ADUser</u> command
+
+73
+00:03:56,758 --> 00:04:00,625
+returns these 10 bits of information about the user.
+
+74
+00:04:01,236 --> 00:04:03,466
+These bits are called "properties",
+
+75
+00:04:03,491 --> 00:04:05,519
+and every PowerShell object has them.
+
+76
+00:04:06,222 --> 00:04:09,432
+If you want to retrieve additional properties with <u>Get-ADUser</u>,
+
+77
+00:04:09,457 --> 00:04:11,954
+you must use the <u>-Properties</u> parameter.
+
+78
+00:04:12,465 --> 00:04:15,696
+If you want too view <i>all</i> properties of a user,
+
+79
+00:04:15,721 --> 00:04:18,147
+use the asterisk ( * ) wildcard.
+
+80
+00:04:19,233 --> 00:04:20,469
+You'll type:
+
+81
+00:04:20,533 --> 00:04:27,742
+Get-ADuser -Identity michelle.adams -Properties *
+
+82
+00:04:31,531 --> 00:04:33,442
+That's the <u>MemberOf</u> property,
+
+83
+00:04:33,467 --> 00:04:36,411
+and it shows all of the groups that Michelle is a member of.
+
+84
+00:04:37,797 --> 00:04:41,945
+For our script, we want the <u>MemberOf</u> property,
+
+85
+00:04:42,129 --> 00:04:43,898
+so we'll type it in as:
+
+86
+00:04:45,102 --> 00:04:49,271
+We can see the same 10 properties as before,
+
+87
+00:04:49,296 --> 00:04:52,354
+with an additional 11th that shows Michelle's group membership.
+
+88
+00:04:54,747 --> 00:04:57,176
+These groups are in <i>Distinguished Name</i> format,
+
+89
+00:04:57,201 --> 00:04:59,768
+which isn't easy to read or type,
+
+90
+00:04:59,804 --> 00:05:02,346
+but that's OK because in the next segment,
+
+91
+00:05:02,453 --> 00:05:05,485
+we're going to store these group names in memory
+
+92
+00:05:05,514 --> 00:05:07,595
+so we don't actually have to ever type them.
+
+93
+00:05:11,433 --> 00:05:15,680
+PowerShell objects can be stored using something called "variables".
+
+94
+00:05:16,021 --> 00:05:18,592
+After a variable is assigned a value,
+
+95
+00:05:18,635 --> 00:05:20,701
+we can then call it later
+
+96
+00:05:20,726 --> 00:05:22,377
+to return the stored object.
+
+97
+00:05:23,741 --> 00:05:25,843
+Variables can be things may things,
+
+98
+00:05:25,868 --> 00:05:27,313
+but the most common are
+
+99
+00:05:27,338 --> 00:05:29,750
+numbers, text, or PowerShell objects.
+
+100
+00:05:29,792 --> 00:05:31,781
+They are represented by text strings
+
+101
+00:05:31,806 --> 00:05:33,485
+that begin with a dollar sign ( $ )
+
+102
+00:05:33,720 --> 00:05:36,007
+such as $a,
+
+103
+00:05:37,357 --> 00:05:39,317
+$process
+
+104
+00:05:40,368 --> 00:05:42,633
+or $my_var
+
+105
+00:05:44,984 --> 00:05:48,237
+Names of variables, like most everything in PowerShell,
+
+106
+00:05:48,262 --> 00:05:50,801
+are not case-sensitive.
+
+107
+00:05:51,241 --> 00:05:53,656
+They can be UPPERCASE,
+
+108
+00:05:54,430 --> 00:05:55,794
+lowercase,
+
+109
+00:05:56,603 --> 00:05:57,931
+PascalCase,
+
+110
+00:05:57,956 --> 00:06:01,077
+which is capitalizing the first letter of each word,
+
+111
+00:06:01,102 --> 00:06:02,029
+without using spaces,
+
+112
+00:06:02,449 --> 00:06:04,267
+or anything in between.
+
+113
+00:06:06,603 --> 00:06:08,265
+To create a new variable,
+
+114
+00:06:08,294 --> 00:06:11,618
+use an assignment statement to assign a value to it.
+
+115
+00:06:13,535 --> 00:06:16,007
+I'll start by typing:
+
+116
+00:06:16,042 --> 00:06:19,387
+<u>$text</u> as our variable name,
+
+117
+00:06:20,072 --> 00:06:22,245
+then an equal sign ( = ),
+
+118
+00:06:22,621 --> 00:06:26,499
+then the text inside quotes ( '' ).
+
+119
+00:06:31,111 --> 00:06:33,462
+The assignment statement can be used
+
+120
+00:06:33,487 --> 00:06:35,947
+with or without spaces around the equals sign ( = ),
+
+121
+00:06:36,118 --> 00:06:38,824
+but <i>with</i> spaces are the recommened style
+
+122
+00:06:38,849 --> 00:06:41,175
+to make it easier to read when scripting.
+
+123
+00:06:43,597 --> 00:06:46,082
+Keep in mind that without the assignment statement,
+
+124
+00:06:46,107 --> 00:06:49,122
+the default value of all variables is "null",
+
+125
+00:06:49,229 --> 00:06:51,807
+that is, nothing or without value.
+
+126
+00:06:51,857 --> 00:06:55,102
+If you try to call a variable before it's been assigned a value,
+
+127
+00:06:55,127 --> 00:06:56,750
+you'll get nothing in return.
+
+128
+00:06:58,313 --> 00:07:02,474
+Let's assign the output of our previously used <u>Get-ADUser</u> command
+
+129
+00:07:02,499 --> 00:07:04,939
+to the variable name <u>$ReferenceUser</u>.
+
+130
+00:07:06,771 --> 00:07:07,602
+We'll type:
+
+131
+00:07:07,627 --> 00:07:15,358
+$ReferenceUser = Get-ADUser -Identity michelle.adams -Properties MemberOf
+
+132
+00:07:16,871 --> 00:07:18,298
+Once we hit <i>ENTER</i>,
+
+133
+00:07:18,323 --> 00:07:21,040
+no output will be given during a variable assignment.
+
+134
+00:07:21,927 --> 00:07:26,011
+We then recall the output of the command stored,
+
+135
+00:07:26,054 --> 00:07:28,327
+by simply typing in the variable name.
+
+136
+00:07:28,639 --> 00:07:30,777
+If we type <u>$ReferenceUser</u>,
+
+137
+00:07:30,802 --> 00:07:32,687
+we'll get the output just the same
+
+138
+00:07:32,712 --> 00:07:34,918
+as if we were to type in the command by itself.
+
+139
+00:07:37,943 --> 00:07:40,422
+We now have completed the first segement of the script.
+
+140
+00:07:40,564 --> 00:07:44,612
+Go ahead and copy that from PowerShell into our script.
+
+141
+00:07:48,412 --> 00:07:51,465
+If we want to return an individual property
+
+142
+00:07:51,490 --> 00:07:54,144
+of an object being stored as a variable,
+
+143
+00:07:54,335 --> 00:07:56,238
+we can type the variable name,
+
+144
+00:07:56,317 --> 00:07:57,411
+then a dot ( . ),
+
+145
+00:07:57,436 --> 00:07:59,009
+then the property name.
+
+146
+00:07:59,697 --> 00:08:01,033
+If we type:
+
+147
+00:08:01,132 --> 00:08:05,088
+$ReferenceUser.MemberOf
+
+148
+00:08:06,643 --> 00:08:08,433
+We have can isolate the groups
+
+149
+00:08:08,458 --> 00:08:10,961
+that we want to add the new user to.
+
+150
+00:08:11,458 --> 00:08:15,471
+Let's assign the groups to the <u>$SelectedGroups</u>  variable
+
+151
+00:08:15,521 --> 00:08:17,857
+to complete the second part of our script.
+
+152
+00:08:33,020 --> 00:08:34,604
+The final step in our script
+
+153
+00:08:34,629 --> 00:08:36,564
+is to add our new user, Paul,
+
+154
+00:08:36,756 --> 00:08:40,470
+to the selected groups with the <u>Add-ADGroupMember</u> command.
+
+155
+00:08:41,280 --> 00:08:44,732
+The <u>Add-ADGroupMember</u> command works like:
+
+156
+00:08:46,237 --> 00:08:55,307
+Add-ADGroupMember -Identity <i>GROUPNAME</i> -Members <i>NEWUSER</i>
+
+157
+00:08:56,756 --> 00:08:59,014
+The <u>-Identity</u> parameter for this command
+
+158
+00:08:59,039 --> 00:09:01,763
+specifies the <i>group</i> that's receiving the new members.
+
+159
+00:09:02,111 --> 00:09:06,159
+You can identify a group by the same ways as <u>Get-ADUser</u>:
+
+160
+00:09:06,184 --> 00:09:09,284
+Again, I prefer to use SAM account name.
+
+161
+00:09:10,918 --> 00:09:16,202
+The <u>-Members</u> parameter specifies the new members to add to a group.
+
+162
+00:09:16,699 --> 00:09:18,674
+You can identify new members
+
+163
+00:09:18,699 --> 00:09:21,422
+by the same ways as you can with the <u>-Identity</u> parameter.
+
+164
+00:09:22,040 --> 00:09:24,639
+SAM account name is always a safe bet.
+
+165
+00:09:27,564 --> 00:09:29,816
+To demonstrate the <u>Add-ADGroupMember</u> command,
+
+166
+00:09:29,841 --> 00:09:31,819
+let's add Paul to the <i>Sales</i> group.
+
+167
+00:09:33,495 --> 00:09:36,243
+We can find the SAM account names of groups
+
+168
+00:09:36,268 --> 00:09:38,871
+just like we find the SAM account name of users
+
+169
+00:09:38,896 --> 00:09:40,938
+by going in ADUC,
+
+170
+00:09:41,449 --> 00:09:43,168
+double-clicking on the group,
+
+171
+00:09:43,317 --> 00:09:46,769
+then finding the "Pre-Windows 2000" name.
+
+172
+00:09:50,418 --> 00:09:51,427
+We'll type:
+
+173
+00:09:51,455 --> 00:09:58,500
+Add-ADGroupMember -Identity Sales -Members paul.allen
+
+174
+00:10:00,875 --> 00:10:02,401
+No output is given,
+
+175
+00:10:02,426 --> 00:10:04,092
+but we can confirm that the command worked
+
+176
+00:10:04,255 --> 00:10:05,995
+ by looking in ADUC.
+
+177
+00:10:19,541 --> 00:10:22,147
+Now, we will want do the last step
+
+178
+00:10:22,176 --> 00:10:25,152
+and add Paul to the four groups that Michelle is a member of.
+
+179
+00:10:26,608 --> 00:10:27,943
+If we try:
+
+180
+00:10:29,149 --> 00:10:37,288
+Add-ADGroupMember -Identity $SelectedGroups -Members paul.allen
+
+181
+00:10:37,935 --> 00:10:39,305
+and we try to run that
+
+182
+00:10:40,015 --> 00:10:41,031
+We'll get an error
+
+183
+00:10:41,056 --> 00:10:43,702
+because the <u>-Identity</u> parameter
+
+184
+00:10:43,727 --> 00:10:45,861
+does not accept more than one group,
+
+185
+00:10:45,886 --> 00:10:47,558
+and we can see that, here,
+
+186
+00:10:47,583 --> 00:10:50,264
+as stated in the Microsoft PowerShell documentation.
+
+187
+00:10:50,974 --> 00:10:54,646
+It does, however, accept input from the pipeline.
+
+188
+00:10:56,756 --> 00:10:59,490
+We'll just use the <i>pipeline</i> to pass that information
+
+189
+00:10:59,515 --> 00:11:01,763
+onto the <u>Add-ADGroupMember</u> command.
+
+190
+00:11:02,345 --> 00:11:03,446
+A word of caution:
+
+191
+00:11:03,471 --> 00:11:05,377
+each PowerShell command behaves
+
+192
+00:11:05,402 --> 00:11:07,302
+just a little bit differently from the others.
+
+193
+00:11:07,494 --> 00:11:10,072
+If something doesn't work the way you think it should,
+
+194
+00:11:10,136 --> 00:11:12,707
+just look to the documentation.
+
+195
+00:11:12,732 --> 00:11:17,288
+<i>When in doubt, look to the books!</i>
+
+196
+00:11:20,697 --> 00:11:24,689
+The <i>pipeline</i> is represented by the pipe symbol ( | ).
+
+197
+00:11:25,257 --> 00:11:27,800
+It is how we can take the output of one command
+
+198
+00:11:27,825 --> 00:11:29,085
+from the left side of the pipe,
+
+199
+00:11:29,369 --> 00:11:31,599
+and use it as input of another command
+
+200
+00:11:31,624 --> 00:11:32,863
+on the right of the pipe.
+
+201
+00:11:33,765 --> 00:11:35,484
+When we use the pipeline,
+
+202
+00:11:35,509 --> 00:11:38,318
+it allows us to chain multiple commands together
+
+203
+00:11:38,343 --> 00:11:40,257
+into a super-command
+
+204
+00:11:40,299 --> 00:11:43,361
+that can create many more possibilities of automation.
+
+205
+00:11:43,559 --> 00:11:46,500
+Let's try it out and add user Paul Allen
+
+206
+00:11:46,525 --> 00:11:48,808
+to all of the groups that Michelle is a member of
+
+207
+00:11:48,943 --> 00:11:50,768
+using all that we learned so far
+
+208
+00:11:50,793 --> 00:11:52,792
+and chain them together with the pipeline.
+
+209
+00:11:52,927 --> 00:11:53,893
+Type in:
+
+210
+00:11:54,213 --> 00:11:59,568
+$SelectedGroups | Add-ADGroupMember
+
+211
+00:11:59,731 --> 00:12:02,615
+We're not going to specify the identity
+
+212
+00:12:02,640 --> 00:12:05,981
+because that's what we're doing on the left side of the pipe.
+
+213
+00:12:06,202 --> 00:12:07,316
+Then we'll type:
+
+214
+00:12:07,345 --> 00:12:09,944
+-Members paul.allen
+
+215
+00:12:11,123 --> 00:12:13,517
+Once we hit <i>ENTER</i> no output is given,
+
+216
+00:12:13,542 --> 00:12:16,798
+but we can confirm it worked in ADUC.
+
+217
+00:12:19,092 --> 00:12:20,747
+Awesome! That worked!
+
+218
+00:12:20,772 --> 00:12:23,425
+We now have completed the last part of the script.
+
+219
+00:12:29,987 --> 00:12:32,721
+Let's review the entire core script.
+
+220
+00:12:34,241 --> 00:12:36,811
+In the first part: We used <u>Get-ADUser</u>,
+
+221
+00:12:36,837 --> 00:12:38,915
+we've identified Michelle Adams,
+
+222
+00:12:38,943 --> 00:12:42,906
+and added the property, <u>MemberOf</u>, to get her group membership,
+
+223
+00:12:43,062 --> 00:12:46,202
+and stored that in the variable <u>$ReferenceUser</u>.
+
+224
+00:12:46,606 --> 00:12:47,977
+In the second part:
+
+225
+00:12:48,002 --> 00:12:51,770
+we only want to assign the groups by themselves
+
+226
+00:12:52,196 --> 00:12:55,378
+so we've isolated that part using
+
+227
+00:12:55,403 --> 00:12:58,261
+$ReferencUser.MemberOf
+
+228
+00:12:58,286 --> 00:13:02,224
+and assigning <i>that</i> output to the <u>$SelectedGroups</u> variable.
+
+229
+00:13:02,828 --> 00:13:04,802
+Then we piped those selected groups
+
+230
+00:13:04,827 --> 00:13:06,756
+into <u>Add-ADGroupMember</u>
+
+231
+00:13:06,781 --> 00:13:10,300
+and specified the user to add to those groups
+
+232
+00:13:10,325 --> 00:13:13,034
+using:
+-Members paul.allen
+
+233
+00:13:18,560 --> 00:13:21,606
+You can verify the results of the script in ADUC
+
+234
+00:13:21,737 --> 00:13:23,932
+and scan the PowerShell console or any errors
+
+235
+00:13:23,957 --> 00:13:26,893
+that could inicate any mistakes that you might have made.
+
+236
+00:13:29,564 --> 00:13:31,943
+Thank you for watching, and I hoped you learned something.
+
+237
+00:13:32,390 --> 00:13:34,237
+As always, the script as shown
+
+238
+00:13:34,262 --> 00:13:36,369
+and the write-up will be uploaded to my GitHub
+
+239
+00:13:36,394 --> 00:13:38,151
+which is linked in the description.
+
