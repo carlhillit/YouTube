@@ -45,7 +45,7 @@ Otherwise, they're the same, because they perform the same core function.
 Since the core part of the script is the same, we're really just changing _how it's used_.
 <br></br>
 
-## Create an Advanced Function in VS Code
+## Creating an Advanced Function in VS Code
 
 To create an advanced function, start by typing "function" and click on "advanced function".
 
@@ -54,11 +54,11 @@ We see that it's given us a good template to work with.
 Now's a good time to give the function a name ensuring that it follows the _Verb-Noun_ format for consistancy with other PowerShell functions and commands.
 <br></br>
 
-## Param Block
-
 ### [CmdletBinding](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions_cmdletbindingattribute?view=powershell-5.1)
 
 We can see that the CmdletBinding is already there for us. This is what makes a function an **advanced function** and unlocks these features that I previously described.
+
+## Param Block
 
 ### [Advanced Parameters](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions_advanced_parameters?view=powershell-5.1)
 
@@ -137,7 +137,7 @@ Since this is not going to receive input from the pipeline, we'll leave that out
 
 Just like with the `Add-ADGroupMember` command from our previous video, we want to be able to add one or more users to a group, so we'll add an opening and closing bracket ( [] ) after "ADPrincipal".
 
-### [Switch Parameter](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions_advanced_parameters?view=powershell-5.1#switch-parameters)
+#### [Switch Parameter](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions_advanced_parameters?view=powershell-5.1#switch-parameters)
 
 As I've mentioned earlier, a switch parameter is like a toggle (on/off) switch in which no extra input is needed.
 
@@ -153,7 +153,7 @@ To simplify the Begin, Process, and End blocks (aka Advanced Methods)
 
 Because we're not doing any pre or post processing, and the `ReferenceUser` parameter is receiving input from the pipeline, only the `process` block will be used.
 
-### Script Logic
+### Placing the Script Logic
 
 Since we've already written most of the script logic, let's use the previous script as a guide for what to place in the `process` block.
 

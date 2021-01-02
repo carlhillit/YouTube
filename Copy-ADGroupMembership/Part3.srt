@@ -16,7 +16,7 @@ that one user is a member of
 
 5
 00:00:08,328 --> 00:00:10,664
-and makes <i>another</i> user a member of those same groups.
+and makes another user a member of those same groups.
 
 6
 00:00:10,852 --> 00:00:12,031
@@ -80,11 +80,11 @@ in which no extra input is needed
 
 21
 00:00:50,284 --> 00:00:53,597
-such as the <u>-UsePicker</u> parameter
+such as the -UsePicker parameter
 
 22
 00:00:53,622 --> 00:00:55,441
-which allows us the <i>option</i>
+which allows us the option
 
 23
 00:00:55,466 --> 00:00:58,089
@@ -92,11 +92,11 @@ of using the Out-GridView window to select the groups
 
 24
 00:00:58,261 --> 00:00:59,753
-and the <u>-PassThru</u> parameter
+and the -PassThru parameter
 
 25
 00:00:59,778 --> 00:01:02,026
-gives us the <i>option</i> of outputting the groups
+gives us the option of outputting the groups
 
 26
 00:01:02,261 --> 00:01:04,066
@@ -120,7 +120,7 @@ The heart of an advanced function
 
 31
 00:01:15,536 --> 00:01:17,573
-is found inside the <u>process</u> block.
+is found inside the process block.
 
 32
 00:01:18,050 --> 00:01:20,636
@@ -132,7 +132,7 @@ and it's where most of the logic will be placed.
 
 34
 00:01:23,417 --> 00:01:25,019
-If we compare the <u>process</u> block
+If we compare the process block
 
 35
 00:01:25,044 --> 00:01:26,698
@@ -168,7 +168,7 @@ Since the core part of the script is the same,
 
 43
 00:01:45,012 --> 00:01:48,128
-we're really just changing <i>how it's used</i>.
+we're really just changing how it's used.
 
 44
 00:01:52,105 --> 00:01:53,792
@@ -208,7 +208,7 @@ for consistancy with other PowerShell functions and commands.
 
 53
 00:02:16,503 --> 00:02:18,417
-We can see that the <u>CmdletBinding</u>
+We can see that the CmdletBinding
 
 54
 00:02:18,442 --> 00:02:19,917
@@ -220,7 +220,7 @@ This is what makes a function
 
 56
 00:02:21,551 --> 00:02:22,855
-an <i>advanced</i> function
+an advanced function
 
 57
 00:02:22,901 --> 00:02:24,331
@@ -236,7 +236,7 @@ We'll begin by adding our first parameter.
 
 60
 00:02:32,167 --> 00:02:33,355
-In the <u>param</u> block,
+In the param block,
 
 61
 00:02:33,380 --> 00:02:35,519
@@ -256,7 +256,7 @@ the first variable that was created
 
 65
 00:02:44,434 --> 00:02:46,175
-was the <u>$ReferenceUser</u> variable,
+was the $ReferenceUser variable,
 
 66
 00:02:46,347 --> 00:02:48,956
@@ -280,7 +280,7 @@ so it also makes sense
 
 71
 00:02:55,942 --> 00:02:57,394
-to start with <u>$ReferenceUser</u>.
+to start with $ReferenceUser.
 
 72
 00:03:00,144 --> 00:03:02,010
@@ -380,7 +380,7 @@ The last attribute we'll add
 
 96
 00:04:03,325 --> 00:04:04,901
-is <u>ValueFromPipeline</u>
+is ValueFromPipeline
 
 97
 00:04:04,933 --> 00:04:06,831
@@ -472,7 +472,7 @@ Since we're mimicking some functionality
 
 119
 00:04:54,059 --> 00:04:55,792
-of the <u>Get-ADUser</u> cmdlet,
+of the Get-ADUser cmdlet,
 
 120
 00:04:55,831 --> 00:04:58,831
@@ -496,7 +496,7 @@ we need to add a comma ( , )
 
 125
 00:05:15,926 --> 00:05:17,722
-after the <u>$ReferenceUser</u> variable
+after the $ReferenceUser variable
 
 126
 00:05:17,747 --> 00:05:19,167
@@ -520,7 +520,7 @@ and make a couple  adjustments
 
 131
 00:05:25,700 --> 00:05:27,261
-for the <u>-TargetUser</u> parameter.
+for the -TargetUser parameter.
 
 132
 00:05:27,839 --> 00:05:30,870
@@ -532,7 +532,7 @@ we'll leave that out.
 
 134
 00:05:38,511 --> 00:05:41,042
-Just like with the <u>Add-ADGroupMember</u> command
+Just like with the Add-ADGroupMember command
 
 135
 00:05:41,067 --> 00:05:42,339
@@ -576,7 +576,7 @@ and will have no attributes.
 
 145
 00:06:09,308 --> 00:06:11,980
-To simplify the <u>Begin</u>, <u>Process</u>, and <u>End</u> blocks
+To simplify the Begin, Process, and End blocks
 
 146
 00:06:12,005 --> 00:06:13,753
@@ -584,11 +584,11 @@ To simplify the <u>Begin</u>, <u>Process</u>, and <u>End</u> blocks
 
 147
 00:06:14,448 --> 00:06:17,417
-he <u>Begin</u> block is for one-time preprocessing
+he Begin block is for one-time preprocessing
 
 148
 00:06:17,442 --> 00:06:20,612
-the <u>Process</u> block is for multiple record processing,
+the Process block is for multiple record processing,
 
 149
 00:06:20,800 --> 00:06:23,378
@@ -600,7 +600,7 @@ for processing input from the pipeline
 
 151
 00:06:25,995 --> 00:06:29,105
-the <u>End</u> block for one-time post-processing.
+the End block for one-time post-processing.
 
 152
 00:06:29,495 --> 00:06:32,511
@@ -608,7 +608,7 @@ Because we're not doing any pre or post processing,
 
 153
 00:06:32,536 --> 00:06:34,409
-and the <u>-ReferenceUser</u> parameter
+and the -ReferenceUser parameter
 
 154
 00:06:34,434 --> 00:06:36,394
@@ -616,7 +616,7 @@ is receiving input from the pipeline,
 
 155
 00:06:36,597 --> 00:06:38,761
-only the <u>process</u> block will be used.
+only the process block will be used.
 
 156
 00:06:39,362 --> 00:06:41,807
@@ -628,7 +628,7 @@ let's use the previous script as a guide
 
 158
 00:06:43,863 --> 00:06:45,894
-for what to place in the <u>process</u> block.
+for what to place in the process block.
 
 159
 00:06:53,870 --> 00:06:55,362
@@ -660,7 +660,7 @@ to your advanced function
 
 166
 00:07:12,919 --> 00:07:15,073
-that can be retrieved with the <u>Get-Help</u> command.
+that can be retrieved with the Get-Help command.
 
 167
 00:07:18,183 --> 00:07:19,519
@@ -680,7 +680,7 @@ should be placed after the "function"
 
 171
 00:07:25,856 --> 00:07:27,269
-and before the <u>Param</u> block.
+and before the Param block.
 
 172
 00:07:28,089 --> 00:07:29,745
@@ -728,7 +728,7 @@ Import the newly created module,
 
 183
 00:08:04,950 --> 00:08:09,183
-and then we can use the <u>Copy-ADGroupMembership</u> command in PowerShell.
+and then we can use the Copy-ADGroupMembership command in PowerShell.
 
 184
 00:08:12,310 --> 00:08:14,873

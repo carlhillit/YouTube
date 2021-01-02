@@ -1,6 +1,6 @@
-1
+﻿1
 00:00:00,242 --> 00:00:03,336
-Hello and welcome to <b>Part 1</b> of the video series
+Hello and welcome to Part 1 of the video series
 
 2
 00:00:03,492 --> 00:00:06,352
@@ -96,7 +96,7 @@ For this script, it's a three-step process:
 
 25
 00:01:23,544 --> 00:01:26,708
-First, I'll explain how to use the <u>Get-ADUser</u> command
+First, I'll explain how to use the Get-ADUser command
 
 26
 00:01:26,733 --> 00:01:29,137
@@ -108,7 +108,7 @@ and the groups that she is a member of.
 
 28
 00:01:32,645 --> 00:01:35,591
-If we just run the <u>Get-ADUser</u> command by itself,
+If we just run the Get-ADUser command by itself,
 
 29
 00:01:35,747 --> 00:01:39,630
@@ -120,7 +120,7 @@ and the command won't work.
 
 31
 00:01:41,395 --> 00:01:44,997
-We want to identify <i>Michelle</i> as the user to get.
+We want to identify Michelle as the user to get.
 
 32
 00:01:46,551 --> 00:01:48,512
@@ -128,7 +128,7 @@ To identify Michelle as the user,
 
 33
 00:01:48,551 --> 00:01:50,786
-we'll use the <u>-Identity</u> parameter.
+we'll use the -Identity parameter.
 
 34
 00:01:51,395 --> 00:01:54,341
@@ -152,7 +152,7 @@ and they always start with a dash ( - ).
 
 39
 00:02:04,871 --> 00:02:07,179
-<u>Get-ADUser</u> has many parameters
+Get-ADUser has many parameters
 
 40
 00:02:07,204 --> 00:02:09,708
@@ -160,7 +160,7 @@ and I may show those later in some other videos,
 
 41
 00:02:09,907 --> 00:02:14,041
-but for now, I'm only going to be concerned with the <u>-Identity</u> parameter.
+but for now, I'm only going to be concerned with the -Identity parameter.
 
 42
 00:02:14,254 --> 00:02:15,958
@@ -168,11 +168,11 @@ The command is going to look like:
 
 43
 00:02:15,994 --> 00:02:22,016
-Get-ADUser -Identity <i>USER</i>
+Get-ADUser -Identity USER
 
 44
 00:02:24,282 --> 00:02:27,265
-<i>USER</i> can be identified by:
+USER can be identified by:
 
 45
 00:02:27,308 --> 00:02:29,268
@@ -240,11 +240,11 @@ by double-clicking on the user,
 
 61
 00:03:10,831 --> 00:03:13,140
-selecting the <u>Account</u> tab,
+selecting the Account tab,
 
 62
 00:03:13,282 --> 00:03:18,140
-and it'll be under <u>User Logon Name (Pre-Windows 2000)</u>.
+and it'll be under "User Logon Name (Pre-Windows 2000)"".
 
 63
 00:03:20,498 --> 00:03:24,120
@@ -256,7 +256,7 @@ by going to the toolbar at the top,
 
 65
 00:03:26,385 --> 00:03:29,816
-clicking on <u>View</u>, and ensure <u>Advanced Features</u> are enabled.
+clicking on View, and ensure Advanced Features are enabled.
 
 66
 00:03:30,512 --> 00:03:32,550
@@ -264,7 +264,7 @@ Then double-click on the user
 
 67
 00:03:32,586 --> 00:03:34,546
-and select the <u>Attribute Editor</u> tab.
+and select the Attribute Editor tab.
 
 68
 00:03:38,552 --> 00:03:42,188
@@ -280,11 +280,11 @@ So we'll type in:
 
 71
 00:03:46,467 --> 00:03:50,377
-<u>Get-ADUser -Identity michelle.adams</u>
+Get-ADUser -Identity michelle.adams
 
 72
 00:03:54,326 --> 00:03:56,733
-By default, the <u>Get-ADUser</u> command
+By default, the Get-ADUser command
 
 73
 00:03:56,758 --> 00:04:00,625
@@ -300,15 +300,15 @@ and every PowerShell object has them.
 
 76
 00:04:06,222 --> 00:04:09,432
-If you want to retrieve additional properties with <u>Get-ADUser</u>,
+If you want to retrieve additional properties with Get-ADUser,
 
 77
 00:04:09,457 --> 00:04:11,954
-you must use the <u>-Properties</u> parameter.
+you must use the -Properties parameter.
 
 78
 00:04:12,465 --> 00:04:15,696
-If you want too view <i>all</i> properties of a user,
+If you want too view all properties of a user,
 
 79
 00:04:15,721 --> 00:04:18,147
@@ -324,7 +324,7 @@ Get-ADuser -Identity michelle.adams -Properties *
 
 82
 00:04:31,531 --> 00:04:33,442
-That's the <u>MemberOf</u> property,
+That's the MemberOf property,
 
 83
 00:04:33,467 --> 00:04:36,411
@@ -332,7 +332,7 @@ and it shows all of the groups that Michelle is a member of.
 
 84
 00:04:37,797 --> 00:04:41,945
-For our script, we want the <u>MemberOf</u> property,
+For our script, we want the MemberOf property,
 
 85
 00:04:42,129 --> 00:04:43,898
@@ -348,7 +348,7 @@ with an additional 11th that shows Michelle's group membership.
 
 88
 00:04:54,747 --> 00:04:57,176
-These groups are in <i>Distinguished Name</i> format,
+These groups are in Distinguished Name format,
 
 89
 00:04:57,201 --> 00:04:59,768
@@ -460,7 +460,7 @@ I'll start by typing:
 
 116
 00:06:16,042 --> 00:06:19,387
-<u>$text</u> as our variable name,
+$text as our variable name,
 
 117
 00:06:20,072 --> 00:06:22,245
@@ -480,7 +480,7 @@ with or without spaces around the equals sign ( = ),
 
 121
 00:06:36,118 --> 00:06:38,824
-but <i>with</i> spaces are the recommened style
+but with spaces are the recommened style
 
 122
 00:06:38,849 --> 00:06:41,175
@@ -508,11 +508,11 @@ you'll get nothing in return.
 
 128
 00:06:58,313 --> 00:07:02,474
-Let's assign the output of our previously used <u>Get-ADUser</u> command
+Let's assign the output of our previously used Get-ADUser command
 
 129
 00:07:02,499 --> 00:07:04,939
-to the variable name <u>$ReferenceUser</u>.
+to the variable name $ReferenceUser.
 
 130
 00:07:06,771 --> 00:07:07,602
@@ -524,7 +524,7 @@ $ReferenceUser = Get-ADUser -Identity michelle.adams -Properties MemberOf
 
 132
 00:07:16,871 --> 00:07:18,298
-Once we hit <i>ENTER</i>,
+Once we hit ENTER,
 
 133
 00:07:18,323 --> 00:07:21,040
@@ -540,7 +540,7 @@ by simply typing in the variable name.
 
 136
 00:07:28,639 --> 00:07:30,777
-If we type <u>$ReferenceUser</u>,
+If we type $ReferenceUser,
 
 137
 00:07:30,802 --> 00:07:32,687
@@ -596,7 +596,7 @@ that we want to add the new user to.
 
 150
 00:08:11,458 --> 00:08:15,471
-Let's assign the groups to the <u>$SelectedGroups</u>  variable
+Let's assign the groups to the $SelectedGroups  variable
 
 151
 00:08:15,521 --> 00:08:17,857
@@ -612,27 +612,27 @@ is to add our new user, Paul,
 
 154
 00:08:36,756 --> 00:08:40,470
-to the selected groups with the <u>Add-ADGroupMember</u> command.
+to the selected groups with the Add-ADGroupMember command.
 
 155
 00:08:41,280 --> 00:08:44,732
-The <u>Add-ADGroupMember</u> command works like:
+The Add-ADGroupMember command works like:
 
 156
 00:08:46,237 --> 00:08:55,307
-Add-ADGroupMember -Identity <i>GROUPNAME</i> -Members <i>NEWUSER</i>
+Add-ADGroupMember -Identity GROUPNAME -Members NEWUSER
 
 157
 00:08:56,756 --> 00:08:59,014
-The <u>-Identity</u> parameter for this command
+The -Identity parameter for this command
 
 158
 00:08:59,039 --> 00:09:01,763
-specifies the <i>group</i> that's receiving the new members.
+specifies the group that's receiving the new members.
 
 159
 00:09:02,111 --> 00:09:06,159
-You can identify a group by the same ways as <u>Get-ADUser</u>:
+You can identify a group by the same ways as Get-ADUser:
 
 160
 00:09:06,184 --> 00:09:09,284
@@ -640,7 +640,7 @@ Again, I prefer to use SAM account name.
 
 161
 00:09:10,918 --> 00:09:16,202
-The <u>-Members</u> parameter specifies the new members to add to a group.
+The -Members parameter specifies the new members to add to a group.
 
 162
 00:09:16,699 --> 00:09:18,674
@@ -648,7 +648,7 @@ You can identify new members
 
 163
 00:09:18,699 --> 00:09:21,422
-by the same ways as you can with the <u>-Identity</u> parameter.
+by the same ways as you can with the -Identity parameter.
 
 164
 00:09:22,040 --> 00:09:24,639
@@ -656,11 +656,11 @@ SAM account name is always a safe bet.
 
 165
 00:09:27,564 --> 00:09:29,816
-To demonstrate the <u>Add-ADGroupMember</u> command,
+To demonstrate the Add-ADGroupMember command,
 
 166
 00:09:29,841 --> 00:09:31,819
-let's add Paul to the <i>Sales</i> group.
+let's add Paul to the Sales group.
 
 167
 00:09:33,495 --> 00:09:36,243
@@ -728,7 +728,7 @@ We'll get an error
 
 183
 00:10:41,056 --> 00:10:43,702
-because the <u>-Identity</u> parameter
+because the -Identity parameter
 
 184
 00:10:43,727 --> 00:10:45,861
@@ -748,11 +748,11 @@ It does, however, accept input from the pipeline.
 
 188
 00:10:56,756 --> 00:10:59,490
-We'll just use the <i>pipeline</i> to pass that information
+We'll just use the pipeline to pass that information
 
 189
 00:10:59,515 --> 00:11:01,763
-onto the <u>Add-ADGroupMember</u> command.
+onto the Add-ADGroupMember command.
 
 190
 00:11:02,345 --> 00:11:03,446
@@ -776,11 +776,11 @@ just look to the documentation.
 
 195
 00:11:12,732 --> 00:11:17,288
-<i>When in doubt, look to the books!</i>
+When in doubt, look to the books!
 
 196
 00:11:20,697 --> 00:11:24,689
-The <i>pipeline</i> is represented by the pipe symbol ( | ).
+The pipeline is represented by the pipe symbol ( | ).
 
 197
 00:11:25,257 --> 00:11:27,800
@@ -856,7 +856,7 @@ Then we'll type:
 
 215
 00:12:11,123 --> 00:12:13,517
-Once we hit <i>ENTER</i> no output is given,
+Once we hit ENTER no output is given,
 
 216
 00:12:13,542 --> 00:12:16,798
@@ -876,7 +876,7 @@ Let's review the entire core script.
 
 220
 00:12:34,241 --> 00:12:36,811
-In the first part: We used <u>Get-ADUser</u>,
+In the first part: We used Get-ADUser,
 
 221
 00:12:36,837 --> 00:12:38,915
@@ -884,11 +884,11 @@ we've identified Michelle Adams,
 
 222
 00:12:38,943 --> 00:12:42,906
-and added the property, <u>MemberOf</u>, to get her group membership,
+and added the property, MemberOf, to get her group membership,
 
 223
 00:12:43,062 --> 00:12:46,202
-and stored that in the variable <u>$ReferenceUser</u>.
+and stored that in the variable $ReferenceUser.
 
 224
 00:12:46,606 --> 00:12:47,977
@@ -908,7 +908,7 @@ $ReferencUser.MemberOf
 
 228
 00:12:58,286 --> 00:13:02,224
-and assigning <i>that</i> output to the <u>$SelectedGroups</u> variable.
+and assigning that output to the $SelectedGroups variable.
 
 229
 00:13:02,828 --> 00:13:04,802
@@ -916,7 +916,7 @@ Then we piped those selected groups
 
 230
 00:13:04,827 --> 00:13:06,756
-into <u>Add-ADGroupMember</u>
+into Add-ADGroupMember
 
 231
 00:13:06,781 --> 00:13:10,300
