@@ -84,7 +84,13 @@ If you were to attempt to use the command without the mandatory parameter, Power
 
      [Parameter( Mandatory )]
 
-~~Mandatory does not need to include "=$true"~~
+
+*NOT SHOWN IN VIDEO*
+
+    Mandatory does not need to include "=$true". By default, simply having the Mandatory attribute will mean that it is set to $true.
+    It is accepted practice to only use if set to 
+    $false.
+
 
 Because this is mandatory, we should also add a Help Message to let the person using the command know what kind of information is mandated.
 
@@ -184,7 +190,6 @@ Import the newly created module, and then we can use the `Copy-ADGroupMembership
 
 
 ### Conclusion
-(Music: "Energy" from Bensound.com)
 
 This is the end of the three-part video series where I took you on a PowerShell coding journey starting with a basic script, adding some cool features to it, and concluded with an advanced function.
 
