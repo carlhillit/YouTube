@@ -1,5 +1,7 @@
+# Part 1: Core Script - Copy AD Group Membership (Mirror Permissions) w/ PowerShell
+
 ## Part 1 Intro
-Hello and welcome to **Part 1** of the video series where we write a PowerShell script that automates the process of adding a new Active Directory user to all of the groups of an existing user.
+Hello and welcome to [Part 1](https://www.youtube.com/watch?v=lVrwnCeJB88) of the video series where we write a PowerShell script that automates the process of adding a new Active Directory user to all of the groups of an existing user.
 <br></br>
 
 [Show core.ps1 script] This is what our script will look like at the end of the video.

@@ -1,6 +1,8 @@
+# Part 2: Interactive Window (Out-GridView) - Copy Group Membership (Mirror Permissions) w/ PowerShell
+
 ## Part 2 Intro
 
-Hello and welcome to **Part 2**. In this video we'll add an interactive selection window using `Out-GridView` to our [script](./Part2_AddOutGridView.ps1) that finds the groups of one user and makes _another_ user a member of those same groups.
+Hello and welcome to [Part 2](https://www.youtube.com/watch?v=09FbxZ44LfQ). In this video we'll add an interactive selection window using `Out-GridView` to our [script](./Part2_AddOutGridView.ps1) that finds the groups of one user and makes _another_ user a member of those same groups.
 <br></br>
 
 ## Using [Out-GridView](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/out-gridview?view=powershell-5.1) for Group Selection

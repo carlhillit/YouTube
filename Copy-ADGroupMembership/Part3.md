@@ -1,6 +1,7 @@
+# Part 3: Advanced Function - Copy AD Group Membership (Mirror Permissions) w/ PowerShell
 
 ## Part 3 Intro
-Hey guys and gals, welcome to **Part 3** of the breakdown of my [Copy-ADGroupMembership](./Copy-ADGroupMembership.ps1) script which finds all the Active Directory groups that one user is a member of and makes _another_ user a member of those same groups.
+Hey guys and gals, welcome to [Part 3](https://www.youtube.com/watch?v=CZn80bc6LZc) of the breakdown of my [Copy-ADGroupMembership](./Copy-ADGroupMembership.ps1) script which finds all the Active Directory groups that one user is a member of and makes _another_ user a member of those same groups.
 
 In this final part, we'll take our script that we've written in Parts 1 & 2 and add it to an advanced function which will turn it into a reusable tool just like native PowerShell cmdlets.
 <br></br>

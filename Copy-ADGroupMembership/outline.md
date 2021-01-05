@@ -1,5 +1,7 @@
+# Copy Group Membership (Mirror Permissions) for Active Directory Users with PowerShell
+
 ## Introduction:
-Hello, in this video series I will be breaking down my script that finds all of the Active Directory groups that one user is a member of and makes another user a member of those same groups.
+Hello, in this [video series](https://www.youtube.com/playlist?list=PLnkgJzscsB-Dfm5DD-qQeuyEvvv4HNDa5) I will be breaking down my script that finds all of the Active Directory groups that one user is a member of and makes another user a member of those same groups.
 This procedure is also commonly known as "permissions mirroring" and is used to grant one user the same access rights and permissions of another user.
 
 ## Demonstrate the manual procedure that the script automates

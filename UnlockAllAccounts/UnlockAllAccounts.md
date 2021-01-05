@@ -1,14 +1,16 @@
+# 7 Keyboard Shortcuts for PowerShell Speed and Efficiency
+
 ## Introduction:
 This is PowerShell Breakdown One-Liners where the entire script is written in just one line.
 
-This one finds all of the Active Directory accounts that are locked out within an Organizational Unit and then unlocks them all.
+[This one](https://www.youtube.com/watch?v=cenJHwdz3Mk) finds all of the Active Directory accounts that are locked out within an Organizational Unit and then unlocks them all.
 
 This really comes in handy when _something_ causes large numbers of users to have their accounts become locked.
 
 When the IT team becomes overwhelmed with support calls, you can run this one-liner to stave off the angry mob long enough so you can fix whatever that _something_ is.
 <br></br>
 
-## Unlock-ADAccount:
+## [Unlock-ADAccount](https://docs.microsoft.com/en-us/powershell/module/addsadministration/unlock-adaccount?view=win10-ps)
 
 The command that unlocks accounts is called `Unlock-ADAccount` and it is fairly simple to use and understand.
 
@@ -35,7 +37,7 @@ Hit ENTER and verify the account is unlocked in ADUC.
 The message that was there before is now gone, so the account is now unlocked.
 <br></br>
 
-## Search-ADAccount
+## [Search-ADAccount](https://docs.microsoft.com/en-us/powershell/module/addsadministration/search-adaccount?view=win10-ps)
 
 That's how you unlock an account. Now I'll show you how to search for all of the accounts that are currently locked out.
 
@@ -61,7 +63,7 @@ Add quotes around the Distinguished Name and we're good to go.
 
 ## Combination
 
-We can combine `Search-ADAccount` and `Unlock-ADAccount` together with the pipe ( | ) to unlock all accounts that are currently locked out.
+We can combine `Search-ADAccount` and `Unlock-ADAccount` together with the [pipe](https://docs.microsoft.com/en-us/powershell/scripting/learn/ps101/04-pipelines?view=powershell-5.1#the-pipeline) ( | ) to unlock all accounts that are currently locked out.
 
 Since the command on the left outputs the identities of accounts, we don't need to use the `-Identity` parameter for the command on the right of the pipe.
 
