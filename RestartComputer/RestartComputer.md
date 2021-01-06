@@ -68,7 +68,7 @@ Add `-Force` to end to force the restart anyway.
 
 ## [Suspend BitLocker](https://docs.microsoft.com/en-us/powershell/module/bitlocker/suspend-bitlocker?view=win10-ps) for Reboot
 
-The remote computer (WIN102) still requires the BitLocker PIN and that can be a problem because the computer will not boot without it.
+The remote computer (WIN102) still requires the BitLocker PIN and that can be a problem because the computer will not start without it.
 
 We can, however, suspend BitLocker on the remote computer for exactly one reboot to avoid that issue.
 
@@ -86,7 +86,7 @@ The Protection Status of the local drive is "ON" while the drive on the remote c
 
 In File Explorer on the remote computer (WIN102) the C: drive shows a yellow triangle indicating that BitLocker protection is suspended.
 
-I can now proceed with restarting the remote computer.
+I can now proceed with restarting the remote computer (WIN102).
 
 The remote computer boots without requiring a PIN, the C: drive icon is back to normal, and the BitLocker status now shows "ON".
 <br></br>
@@ -95,6 +95,6 @@ The remote computer boots without requiring a PIN, the C: drive icon is back to 
 
 That's it! That's how to restart a BitLocker-enabled computer remotely with PowerShell.
 
-The write-up with detailed information not shown in the video will be uploaded to GitHub; linked in the description.
+The write-up with detailed information not shown in the video will be uploaded to GitHub, linked in the description.
 
 Thank you for watching, and I hoped you learned something.
