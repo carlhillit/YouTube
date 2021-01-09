@@ -1,8 +1,10 @@
+# 7 Keyboard Shortcuts for PowerShell Speed and Efficiency
+
 ## Introduction
 
 This is PowerShell Breakdown Tips & Tricks
 
-In this video I'm going to show you 7 of my favorite keyboard shortcuts to make your use of PowerShell faster and more efficient.
+In [this video](https://www.youtube.com/watch?v=cenJHwdz3Mk) I'm going to show you 7 of my favorite keyboard shortcuts to make your use of PowerShell faster and more efficient.
 <br></br>
 
 ## Top 7 Keyboard Shortcuts
