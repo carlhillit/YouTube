@@ -7,6 +7,8 @@ This is PowerShell Breakdown One-Liners where the entire script is written in ju
 
 This really comes in handy when _something_ causes large numbers of users to have their accounts become locked.
 
+*WARNING: Account lockouts can also be an indicator of malicious activity. Assess the risks involved with unlocking all accounts before doing so.*
+
 When the IT team becomes overwhelmed with support calls, you can run this one-liner to stave off the angry mob long enough so you can fix whatever that _something_ is.
 <br></br>
 
@@ -76,6 +78,3 @@ No results are returned, so that tells us that no accounts are currently locked 
 ## Conclusion:
 That's it! That's all there is to it.
 
-As always, the script shown in the video, the write-up, and the supporting scripts will be uploaded to my GitHub which is linked in the description.
-
-Thank you for watching. I hope you learned something.

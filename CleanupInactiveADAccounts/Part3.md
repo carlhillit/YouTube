@@ -1,1 +1,0 @@
-# Splatting, Where-Object, Move-ADObject - Cleanup Inactive Active Directory Accounts w/ PowerShell | Part 3

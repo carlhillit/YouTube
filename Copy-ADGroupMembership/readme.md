@@ -13,7 +13,7 @@ This procedure is also commonly known as "permissions mirroring" and is used to 
 
 5. Double-click on the user to add to groups
 6. Select the **MemberOf** tab, click **Add...**
-7. Enter the names of the groups from the reference user, seperated by a semicolon (`;`)
+7. Enter the names of the groups from the reference user, separated by a semicolon (`;`)
 8. Verify the group names with **Check Names**
 9. Click **OK** and **OK** again
 <br></br>
@@ -22,9 +22,9 @@ This procedure is also commonly known as "permissions mirroring" and is used to 
 While the manual process isn't too cumbersome in our example, we can use PowerShell to automate this process.
 [show time comparison of manual process (51 seconds vs script (2 seconds)]
 
-In [Part 1](./Part1.md), I'll show the core script and cover the `Get-ADUser` and `Add-ADGroupMember` commands,
+In [Part 1](./1-Core/readme.md), I'll show the core script and cover the `Get-ADUser` and `Add-ADGroupMember` commands,
     as well as how to store objects as a variable, and how you can use output of one command as input of another using the pipeline.
 
-In [Part 2](./Part2.md), we'll add the `Out-GridView` command to the script to give you an interactive window so you can select specific groups.
+In [Part 2](./2-OutGridView/readme.md), we'll add the `Out-GridView` command to the script to give you an interactive window so you can select specific groups.
 
-Finally, in [Part 3](./Part3.md), we'll put everything together into an advanced function and add it to a PowerShell module for long-term reuse.
+Finally, in [Part 3](./3-AdvancedFunction/readme.md), we'll put everything together into an advanced function and add it to a PowerShell module for long-term reuse.
