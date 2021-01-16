@@ -2,10 +2,10 @@
 
 ## Intro
 
-In [this video](https://www.youtube.com/watch?v=czDLFWBZ-JQ) I'll demonstrate how to restart a Windows computer remotely using PowerShell even if the remote computer is BitLocker enabled.
+This [video](https://www.youtube.com/watch?v=czDLFWBZ-JQ) demonstrates how to restart a Windows computer remotely using PowerShell even if the remote computer is BitLocker enabled.
 
 **Virtual Machines Used in Demo**
-| Description | Operating System | ComptuerName |
+| Description | Operating System | ComputerName |
 | --- | :---: | ---: |
 | Local Computer | Windows 10 w/ BitLocker | WIN101 |
 | Remote Computer | Windows 10 w/ BitLocker | WIN102 |
@@ -39,13 +39,11 @@ I'll hop on over to the domain controller and edit the empty "Firewall" Group Po
 
 Under Computer Configuration, I'll then navigate to the Windows firewall Inbound rules.
 
-*NOT IN VIDEO*
-
     Computer Configuration > Policies > Windows Settings > Security Settings > Windows Defender Firewall with Advanced Security > Windows Defender Firewall with Advanced Security > Inbound
 
 Right-clicking in the blank space will present the menu to create a **New Rule**.
 
-Select the **Predefined** radio button and click on the drop-down menu to select `Windows Mangement Instrumentation (WMI)`.
+Select the **Predefined** radio button and click on the drop-down menu to select `Windows Management Instrumentation (WMI)`.
 
 I'll click Next, review the settings and click Next.
 
@@ -53,9 +51,7 @@ The default **Allow the connection** is good for me, so I'll click **Finish** to
 
 If you do not want to wait until the remote computer's group policy updates, run the command [gpupdate](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/gpupdate) on the remote computer to force an immediate update.
 
-*NOT IN VIDEO*
-
-*Enable the rule on local computer with PowerShell*
+*NOT IN VIDEO: Enable the rule on local computer with PowerShell*
 
     Set-NetFirewallRule -Name WMI-WINMGMT-In-TCP-NoScope -Enabled True
 
@@ -94,7 +90,3 @@ The remote computer boots without requiring a PIN, the C: drive icon is back to 
 ## Conclusion
 
 That's it! That's how to restart a BitLocker-enabled computer remotely with PowerShell.
-
-The write-up with detailed information not shown in the video will be uploaded to GitHub, linked in the description.
-
-Thank you for watching, and I hoped you learned something.

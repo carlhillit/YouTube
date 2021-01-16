@@ -1,7 +1,6 @@
 # Cleanup Inactive AD Accounts w/ PowerShell Pt 1: New-Timespan, Search-ADAccount, Disable-ADAccount
 
-## Introduction & Final Script Demonstration
-Welcome back to PowerShell Breakdown.
+## Introduction
 
 This script that I'm showing in [this video](https://www.youtube.com/watch?v=REy_NNYCabo) disables inactive (aka stale) computers in Active Directory.
 
@@ -16,7 +15,7 @@ I'm using computers in this script, but everything shown is applicable for user 
 
 I'll start by typing the three main steps of the script to map out the logical process the script will follow.
 
-The steps will by typed in the form of comments by using the number sign ( # ).
+The steps will by typed in the form of comments by using the number sign ( `#` ).
 
 1. Define the "inactive" time period (45 days)
 2. Search for the accounts in the Computers OU that are inactive past the defined time period
@@ -31,7 +30,7 @@ To create a timespan object, the command to use is `New-TimeSpan`.
 
 I need to let PowerShell know that I want 45 days and not 45 hours or 45 seconds.
 
-I then press SPACE, then type a dash ( - ).
+I then press SPACE, then type a dash ( `-` ).
 
 I'll use the `-Days` parameter to specify 45 days.
 
@@ -39,7 +38,7 @@ I'll use the `-Days` parameter to specify 45 days.
 
 These options are called "parameters" and it's used narrow the scope or help specify the task that I'm telling PowerShell to do.
 
-They will always start with a dash (`-`).
+They will always start with a dash ( `-` ).
 
 Now I'll run the command and see that the object is 45 days.
 <br</br>
@@ -48,16 +47,11 @@ Now I'll run the command and see that the object is 45 days.
 
 There are other ways to create a timespan object, but I prefer the `New-TimeSpan` command because it is easiest to read and understand for those who are not familiar with using timespans in PowerShell.
 
-*Not shown in video*
+*This first step is not necessary, as the `-TimeSpan` parameter accepts a timespan object as input so it could be written as Search-ADAccount -Timespan '45'.*
 
-    This first step is not necessary, as the -TimeSpan parameter accepts a timespan object as input so it could be writen as Search-ADAccount -Timespan '45'.
+*Other ways to create a timespan object of 45 days would be: `[timespan]'45'` or `[timespan]45d`.*
 
-    Other ways to create a timespan object of 45 days would be:
-
-        [timespan]'45'
-        [timespan]45d
-
-    Warning: it is easy to mistake [timespan]'45' for [timespan]45. The latter is not correct, as the object returned is 45 ticks ( 0.009 miliseconds) and not 45 days. This would cause all accounts to be disabled, as all accounts will meet the criteria of 0.009 milliseconds.
+*WARNING: it is easy to mistake `[timespan]'45'` for `[timespan]45`. The latter is not correct, as the object returned is 45 ticks ( 0.009 milliseconds) and not 45 days. This would cause all accounts to be disabled, as all accounts will meet the criteria of 0.009 milliseconds.*
 
 ### Variables
 
@@ -65,11 +59,11 @@ I'll next store the timespan in a [variable](https://docs.microsoft.com/en-us/po
 
 Variables are a way to store things like text, numbers, or PowerShell objects in the computer's memory that can then be later recalled.
 
-Variables are created by typing a dollar sign ( $ ) followed by the variable name. The name can be in uppercase, lowercase, or any combination of cases.
+Variables are created by typing a dollar sign ( `$` ) followed by the variable name. The name can be in uppercase, lowercase, or any combination of cases.
 
-*For names with more than one word, I like the [preferred convention](https://github.com/PoshCode/PowerShellPracticeAndStyle/blob/master/Style-Guide/Code-Layout-and-Formatting.md#capitalization-conventions) of using Pascal Case by capitalizing the first letter of each word and use no dashes ( - ) or underscores ( _ ) so that it's easy to read.*
+*For names with more than one word, I like the [preferred convention](https://github.com/PoshCode/PowerShellPracticeAndStyle/blob/master/Style-Guide/Code-Layout-and-Formatting.md#capitalization-conventions) of using Pascal Case by capitalizing the first letter of each word and use no dashes ( `-` ) or underscores ( `_` ) so that it's easy to read.*
 
-Variables are then given value by typing the variable name, an equals sign ( = ) and then the value.
+Variables are then given value by typing the variable name, an equals sign ( `=` ) and then the value.
 
     $DaysInactive = New-TimeSpan -Days 45
 
@@ -93,13 +87,9 @@ While the attribute that is shown here will likely not be up-to-date, it is good
 
 If you'd like know a way to get more accurate results, check out the write-up on GitHub linked in the description. 
 
-*Not shown in video*
+*The lastLogondate/lastLogonTimestamp will be 9-14 days behind the current date as the attribute is replicated infrequently. The lastLogon attribute is updated accurately, but only on the domain controller that authenticated the account logon. Therefore, one must query all domain controllers in the domain for the lastLogon attribute and compare for the most recent.*
 
-    The lastLogondate/lastLogonTimestamp will be 9-14 days behind the current date as the attribute is replicated infrequently.
-    The lastLogon attribute is updated accurately, but only on the domain controller that authenticated the account logon.
-    Therefore, one must query all domain controllers in the domain for the lastLogon attribute and compare for the most recent.
-
-*Here's an [alternate script](./DisInctComps-AccurateLastLogon.ps1) using the lastLogon attribute gathered from all DCs.*
+*Here's an [alternate script](../CleanupAD_AccurateLastLogon.ps1) using the lastLogon attribute gathered from all DCs.*
 <br></br>
 
 ### -TimeSpan vs -DateTime
@@ -120,7 +110,7 @@ The advantage of this option is that no date calculation is needed.
 
 ### -ComputersOnly
 
-In this Active Direcotry environment, computer and user accounts are kept in separate OUs.
+In my Active Directory lab environment, computer and user accounts are kept in separate OUs.
 
 If the OU contains both computer and user accounts, add the `-ComputersOnly` parameter to only search for computers.
 <br></br>
@@ -129,7 +119,7 @@ If the OU contains both computer and user accounts, add the `-ComputersOnly` par
 
 I can further narrow my search by adding `-SearchBase` followed by the DistinguishedName of the OU.
 
-The DistinguishedName is found in ADUC by right-clicking on the OU, selecting Properties, and viewing the Attribute Editor tab.
+The DistinguishedName is found in ADUC by right-clicking on the OU, selecting **Properties**, and viewing the **Attribute Editor** tab.
 
 Double-click on the attribute and copy the name to the clipboard.
 
@@ -144,14 +134,14 @@ Next, I'll use the `Disable-ADAccount` command to disable the computer account.
 
 To use the command by itself, I would use `Disable-ADAccount -Identity COMPUTER`.
 
-I can identify the computer by one of these attributes, found in ADUC in the Attribute Editor.
+I can identify the computer by one of these attributes, found in ADUC in the **Attribute Editor**.
 
 * distinguished name
 * GUID (objectGUID)
 * Security Identifier (objectSid)
 * SAM Account Name (SAMAccountName)
 
-Note that by default, computers' SAM Account names end with a dollar sign ( $ ) which is different from user accounts.
+Note that by default, computers' SAM Account names end with a dollar sign ( `$` ) which is different from user accounts.
 
 The `-Identity` parameter does not normally accept multiple identities as seen here in the Microsoft Documentation, but it can by using the [pipeline](https://docs.microsoft.com/en-us/powershell/scripting/learn/ps101/04-pipelines?view=powershell-5.1#the-pipeline).
 
@@ -181,10 +171,5 @@ With the `-PassThru` parameter, I can see which computers are disabled.
 
 Verify the results in ADUC and scan the PowerShell console for any errors that could indicate any mistakes that you might have made.
 
-### End of Part 1
-This is the end of Part 1.
-
-Thank you for watching, and I hoped you learned something.
-
-As always, the script as shown and the write-up will be uploaded to my GitHub which is linked in the description.
+*End of Part 1*
 
