@@ -1,14 +1,12 @@
 # Part 3: Advanced Function - Copy AD Group Membership (Mirror Permissions) w/ PowerShell
 
-## Part 3 Intro
-Hey guys and gals, welcome to [Part 3](https://www.youtube.com/watch?v=CZn80bc6LZc) of the breakdown of my [Copy-ADGroupMembership](./Copy-ADGroupMembership.ps1) script which finds all the Active Directory groups that one user is a member of and makes _another_ user a member of those same groups.
+## Introduction
+Hey guys and gals, welcome to [Part 3](https://www.youtube.com/watch?v=CZn80bc6LZc) of the breakdown of my [Copy-ADGroupMembership](./Copy-ADGroupMembership.ps1) script which finds all the Active Directory groups that one user is a member of and makes another user a member of those same groups.
 
-In this final part, we'll take our script that we've written in Parts 1 & 2 and add it to an advanced function which will turn it into a reusable tool just like native PowerShell cmdlets.
+In this final part, the script from Parts 1 & 2 is added to an advanced function which will turn it into a reusable tool just like native PowerShell commands.
 <br></br>
 
-### [Advanced Functions](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions_advanced?view=powershell-5.1)
-
-It has:
+### Features of an [Advanced Function](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions_advanced?view=powershell-5.1)
 
 * Positional Parameters
   
@@ -24,9 +22,9 @@ It has:
   
   Switch parameters are more of a toggle (on/off) "switch" in which no extra input is needed.
   
-  The `-UsePicker` parameter allows us the _option_ of using the Out-GridView windows to select groups and
+  The `-UsePicker` parameter allows us the option of using the Out-GridView windows to select groups and
   
-  The `-PassThru` parameter gives us the _option_ of outputting the groups that our target user was added to the console.
+  The `-PassThru` parameter gives us the option of outputting the groups that our target user was added to the console.
   
   This could be useful if you wanted to log/document the action or pass those groups through the pipeline to another command.
 <br></br>
@@ -39,11 +37,11 @@ You can also think of it as the engine and it's where most of the logic will be 
 
 If we compare the `process` block with our script from Part 2, we can see many similarities.
 
-Variable names have slightly changed, and two 'if' statements are added to take action if the switch parameter is used.
+Variable names have slightly changed, and two `if` statements are added to take action if the switch parameter is used.
 
 Otherwise, they're the same, because they perform the same core function.
 
-Since the core part of the script is the same, we're really just changing _how it's used_.
+Since the core part of the script is the same, we're really just changing how it's used.
 <br></br>
 
 ## Creating an Advanced Function in VS Code
@@ -52,7 +50,7 @@ To create an advanced function, start by typing "function" and click on "advance
 
 We see that it's given us a good template to work with.
 
-Now's a good time to give the function a name ensuring that it follows the _Verb-Noun_ format for consistancy with other PowerShell functions and commands.
+Now's a good time to give the function a name ensuring that it follows the `Verb-Noun` format for consistency with other PowerShell functions and commands.
 <br></br>
 
 ### [CmdletBinding](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions_cmdletbindingattribute?view=powershell-5.1)
@@ -86,16 +84,11 @@ If you were to attempt to use the command without the mandatory parameter, Power
      [Parameter( Mandatory )]
 
 
-*NOT SHOWN IN VIDEO*
-
-    Mandatory does not need to include "=$true". By default, simply having the Mandatory attribute will mean that it is set to $true.
-    It is accepted practice to only use if set to 
-    $false.
-
+*Mandatory does not need to include "=$true". By default, simply having the Mandatory attribute will mean that it is set to $true. Only use if set to $false.*
 
 Because this is mandatory, we should also add a Help Message to let the person using the command know what kind of information is mandated.
 
-We also need to seperate the attributes by a comma ( , ) to let PowerShell know that we're starting a new attribute and it's not just a continuation of something before it.
+We also need to separate the attributes by a comma ( `,` ) to let PowerShell know that we're starting a new attribute and it's not just a continuation of something before it.
 
     [Parameter( Mandatory,HelpMessage='Reference user to gather group membership from' )]
 
@@ -125,13 +118,13 @@ But if we type: string two times string two, we'll get twenty-two, because it co
     [string]2 * [string]2
     22
 
-Since we're mimicking some functionality of the `Get-ADUser` cmdlet, as well as to ensure interoperability with it, I'm going to use the type from the documentation.
+Since we're mimicking some functionality of the `Get-ADUser` command, as well as to ensure interoperability with it, I'm going to use the type from the documentation.
 In this case, it's `ADUser`.
 
         [Microsoft.ActiveDirectory.Management.ADUser]
         $ReferenceUser
 
-Before we add a new parameter, we need to add a comma ( , ) after the `$ReferenceUser` variable to indicate that there will be a follow-on parameter.
+Before we add a new parameter, we need to add a comma ( `,` ) after the `$ReferenceUser` variable to indicate that there will be a follow-on parameter.
 
 We'll add a 2nd parameter similar to the 1st, and make a couple  adjustments for the `$TargetUser` parameter.
 Since this is not going to receive input from the pipeline, we'll leave that out.
@@ -142,7 +135,7 @@ Since this is not going to receive input from the pipeline, we'll leave that out
     [Microsoft.ActiveDirectory.Management.ADPrincipal[]]
     $TargetUser,
 
-Just like with the `Add-ADGroupMember` command from our previous video, we want to be able to add one or more users to a group, so we'll add an opening and closing bracket ( [] ) after "ADPrincipal".
+Just like with the `Add-ADGroupMember` command from our previous video, we want to be able to add one or more users to a group, so we'll add an opening and closing bracket ( `[]` ) after "ADPrincipal".
 
 #### [Switch Parameter](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions_advanced_parameters?view=powershell-5.1#switch-parameters)
 
@@ -185,20 +178,10 @@ While all keywords will probably go unused, I would recommend that at a minimum,
 
 ### Create Module
 
-Now that we've finished writing the funciton, save it with a .psm1 file extension in the PowerShell modules folder.
+Now that we've finished writing the function, save it with a .psm1 file extension in the PowerShell modules folder.
 
 Import the newly created module, and then we can use the `Copy-ADGroupMembership` command in PowerShell.
 
 
-### Conclusion
+*End of Part 3**
 
-This is the end of the three-part video series where I took you on a PowerShell coding journey starting with a basic script, adding some cool features to it, and concluded with an advanced function.
-
-All of the scripts shown in the videos, as well as the writeup will be on my GitHub, linked in the description.
-
-If you found the video useful, push that "like" button.
-
-I'll be uploading more videos regularly so make sure that you're subscribed.
-
-
-Thank you for watching, and I hope you learned something.

@@ -1,23 +1,15 @@
 # Part 1: Core Script - Copy AD Group Membership (Mirror Permissions) w/ PowerShell
 
-## Part 1 Intro
+## Introduction
 Hello and welcome to [Part 1](https://www.youtube.com/watch?v=lVrwnCeJB88) of the video series where we write a PowerShell script that automates the process of adding a new Active Directory user to all of the groups of an existing user.
+
+The script is only three lines of code, but that little bit will save you time and energy in the future.
 <br></br>
-
-[Show core.ps1 script] This is what our script will look like at the end of the video.
-It's only three lines of code, but that little bit will save you time and energy in the future.
-
-[Create new .ps1 file]
-We'll begin by creating a new file and saving it with a .ps1 file extension.
-
-[Split VS Code editor to right]
-I'll keep the finished version on the left side so we can following along as we write the script.
-
 
 ### Logical Progression / Outline
 Whenever I write a script, way before I even start writing any code, I like to map out the logical progression that the script will follow.
-I'll do this in the form of comments which start with a `#`.
-Everything after the `#` will not be run by PowerShell and is used for any notes, reminders, or explanations that you'd want to put in.
+I'll do this in the form of comments which start with a number sign ( `#` ).
+Everything after the number sign will not be run by PowerShell and is used for any notes, reminders, or explanations that you'd want to put in.
 
 For this script, it's a three-step process:
 1. Get the reference user along with group memberships
@@ -74,13 +66,13 @@ If you want to retrieve additional properties with `Get-ADUser`, you must use th
 
 If you want too view all properties of a user, use the asterisk (`*`) wildcard.
 
-    Get-ADuser -Identity michelle.adams -Properties *
+    Get-ADUser -Identity michelle.adams -Properties *
 
 
 For our script, we want the `MemberOf` property.
 So we type in:
 
-    Get-ADuser -Identity michelle.adams -Properties MemberOf
+    Get-ADUser -Identity michelle.adams -Properties MemberOf
 
 
 We can see the same 10 properties as before, with an additional 11th that shows Michelle's AD group membership.
@@ -98,13 +90,13 @@ They are represented by text strings that begin with a dollar sign `$`, such as 
 
 Names of variables, like most everything in PowerShell, are not case-sensitive.
 
-They can be UPPERCASE, lowercase, PascalCase (which is captializing the 1st letter of each word and not using spaces), or anything in between.
+They can be UPPERCASE, lowercase, PascalCase (which is capitalizing the 1st letter of each word and not using spaces), or anything in between.
 
 To create a new variable, use an assignment statement to assign a value to it.
 
     $text = 'text'
 
-The assignment statement can be used with or without spaces around the equals (`=`) sign, but _with_ spaces are the recommened style to make it easier to read when scripting.[1]
+The assignment statement can be used with or without spaces around the equals (`=`) sign, but _with_ spaces are the recommend style to make it easier to read when scripting.[1]
 
 Keep in mind that without the assignment statement, the default value of all variables is **$null**, that is, nothing or without value.
 If you try to call a variable before it's been assigned a value, you'll get nothing in return.
@@ -122,17 +114,17 @@ We then recall the output of the command stored, by simply typing in the variabl
 
 If we type in `$ReferenceUser`, we'll get the output just the same as if we were to type in the command by itself.
 
-**We now have completed the first segement of the script!**
+We now have completed the **first segment of the script!**
 
 [1]: https://poshcode.gitbooks.io/powershell-practice-and-style/content/Style-Guide/Code-Layout-and-Formatting.html
 <br></br>
 
 
-To return an individual property of an object stored as a variable, type the variable name, **dot**, and the property name.
+To return an individual property of an object stored as a variable, type the variable name, dot, and the property name.
 
     $ReferenceUser.MemberOf
 
-Now we have isolated the groups that we want to add the new user to, let's assign the groups to the `$SelectedGroups` variable to **complete the second part of our script**.
+Now we have isolated the groups that we want to add the new user to, let's assign the groups to the `$SelectedGroups` variable to complete the **second part of our script**.
 <br></br>
 
 ### [Add-ADGroupMember](https://docs.microsoft.com/en-us/powershell/module/addsadministration/add-adgroupmember?view=win10-ps)
@@ -160,7 +152,7 @@ To demonstrate the `Add-ADGroupMember` command, let's add Paul to the Sales grou
 
     Add-ADGroupMember -Identity Sales -Members paul.allen
 
-_No output is given but we can confirm that the command worked by looking in ADUC._
+*No output is given but we can confirm that the command worked by looking in ADUC.*
 <br></br>
 
 Now, we will want do the last step and add Paul to the four groups that Michelle is a member of.
@@ -177,7 +169,7 @@ So we'll just use the **pipeline** to pass that information onto the `Add-ADGrou
 
 A word of caution: each PowerShell command behaves just a little bit differently from the others.
 
-If something doesn't work the way you think it should, [look to the books!].
+If something doesn't work the way you think it should, look to the documentation.
 
 
 ### Passing Objects Through the [Pipeline](https://docs.microsoft.com/en-us/powershell/scripting/learn/ps101/04-pipelines?view=powershell-5.1#the-pipeline)
@@ -213,8 +205,5 @@ If you're using Visual Studio Code or PowerShell ISE, you can run the completed 
 
 Verify the results in ADUC and scan the PowerShell console for any errors that could indicate any mistakes that you might have made.
 
-### End of Part 1
-Thank you for watching, and I hoped you learned something.
-
-As always, the script as shown and the write-up will be uploaded to my GitHub which is linked in the description.
+*End of Part 1*
 

@@ -2,9 +2,17 @@
 
 ## Introduction
 
-This is PowerShell Breakdown Tips & Tricks
+This [video](https://www.youtube.com/watch?v=cenJHwdz3Mk) shows 7 of my favorite keyboard shortcuts to make using PowerShell faster and more efficient.
 
-In [this video](https://www.youtube.com/watch?v=cenJHwdz3Mk) I'm going to show you 7 of my favorite keyboard shortcuts to make your use of PowerShell faster and more efficient.
+### TL;DR
+
+1. **UP arrow** key to cycle through previously entered commands
+2. **Tab** to auto-complete
+3. **HOME** and **END** keys to move the cursor to the beginning and end of a line
+4. **Ctrl+HOME** and **Ctrl+END** to remove everything to the right or left of the cursor
+5. **Ctrl+ARROW** keys to move one word block at a time
+6. **Ctrl+DEL** and **Ctrl+BACKSPACE** to delete whole word blocks at a time
+7. **Ctrl+SPACE** to bring up a menu of parameters
 <br></br>
 
 ## Top 7 Keyboard Shortcuts
@@ -23,7 +31,7 @@ In [this video](https://www.youtube.com/watch?v=cenJHwdz3Mk) I'm going to show y
    
    If you've already passed your desired selection, you can hold the SHIFT key while pressing tab (**Shift+Tab**) to cycle backwards.
    
-   (_The more you type, the fewer options to cycle though and the more accurate the tab completion will be_)
+   *(The more you type, the fewer options to cycle though and the more accurate the tab completion will be)*
 
 3. **HOME** and **END** keys to move the cursor to the beginning and end of a line
    
@@ -40,7 +48,7 @@ In [this video](https://www.youtube.com/watch?v=cenJHwdz3Mk) I'm going to show y
 5. **Ctrl+ARROW** keys to move one word block at a time
    
    Holding Control and using the left and right arrows, moves the cursor to the beginning of the next word.
-   With `Get-NetIPAddress` the words are seperated with a dash/hyphen.
+   With `Get-NetIPAddress` the words are separated with a dash/hyphen ( `-` ).
 
 6. **Ctrl+DEL** and **Ctrl+BACKSPACE** to delete whole word blocks at a time
    
@@ -51,9 +59,4 @@ In [this video](https://www.youtube.com/watch?v=cenJHwdz3Mk) I'm going to show y
    Last, but not least, is my personal favorite. That is the Ctrl+SPACE combination to bring up a menu of available options. These are all the parameters that I have available for the `Get-NetIPAddress` command. It even shows you the type of parameter in the bottom left corner. In this case, `-IPAddress` takes an array of strings. To navigate, use the UP/DOWN/LEFT/RIGHT arrows to highlight the desired selection, and hit ENTER to make the selection. To exit the menu without making a selection, simply press the BACKSPACE key.
 <br></br>
 
-## Conclusion
-
-PowerShell is a great tool, but it can be frustrating if you can't navigate the shell very quickly so hopefully these shortcuts will make your experience better.
-
-Thank you for watching, and I hope you learned something.
 
