@@ -22,15 +22,18 @@ $InactiveComputers = Search-ADAccount @searchParams | Where-Object -Property Dis
 # append disabled date to description
 $DisabledDate = Get-Date -Format yyyy-MM-dd # date format that goes into computer description
 
-foreach ($Computer in $InactiveComputers) {
+$InactiveComputers | ForEach-Object {
 
-    $Description = Get-ADComputer $Computer.Name -Properties Description
+    $ComputerInfo = Get-ADComputer -Identity $_.Name -Properties Description
 
-    $Description = $Description.Description
+    $Description = $ComputerInfo.Description
 
-    Set-ADComputer $Computer.Name -Description "Inactive, disabled on $DisabledDate --- $Description"
+    $NewDescription = "Inactive, disabled on $DisabledDate -- $Description"
+
+    Set-ADComputer -Identity $_.Name -Description $NewDescription
 
 }
+
 
 
 # disable accounts
