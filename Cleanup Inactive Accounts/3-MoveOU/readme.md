@@ -2,39 +2,36 @@
 
 ## Introduction & Script Demonstration
 
-Hello my favorite PowerShellians!
+Welcome back everyone!
 
 In the previous two videos, I made a simple script that finds and disables all computers in an OU that have not had any users logon to them in the past 45 days and updated the AD description to include the disabled date.
 
-In this video, I'm going to further expand the script by moving the disabled computers to an different OU for inactive computers and then removing the ones from that Inactive OU that haven't had any users logon in the past 90 days.
+In this video, I'm going to further expand the script by moving the disabled computers to another OU for inactive computers and then removing the ones from that Inactive OU that haven't had any users logon in the past 90 days.
 
-I'll introduce you, the viewer, to Splatting and the `Where-Object` and `Move-ADObject` commands.
+In the process, I'll show you how to use Splatting for easier parameter input, the `Where-Object` command to filter output, and a couple other basic commands to manage Active Directory objects.
 <br></br>
 
-## Script Changes
-1. Added variable for the Inactive OU Distinguished Name
-2. Combined the parameters for `Search-ADAccount` command into a hash table for a splatting variable.
-3. Filtered out the Inactive OU with `Where-Object` during the first search.
-4. Moved the inactive computers to the Inactive OU with `Move-ADObject`.
-5. Code block to remove computers from the Inactive OU that have been inactive for 90 days.
+## Adding Inactive OU Variable
+
+I'll first want to add the Distinguished Name of the Inactive OU as a variable at the top.
+This is the OU that computers will be moved to that been inactive an additional 45 days after they've been disabled.
 <br></br>
 
 ## [Splatting](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_splatting?view=powershell-5.1)
-Splatting is a way to pass a collection of parameter inputs to a command all at once.
+The parameters for the `Search-ADAccount` command are quite long.
+It is so long that some monitors may not be able to display the whole thing, and splatting makes it easier to read and understand when there are more than two parameters.
 
-When writing a script, splatting makes it easier to read and understand the parameters and their input values when commands have more than two or three parameters.
+Because of that, I'm going to use Splatting to turn the long list of parameter inputs into a two-column [table](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_hash_tables?view=powershell-5.1), and then pass that whole table of input values to the command all at once.
 
-Instead of one big line, a splatting variable uses a [hash table](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_hash_tables?view=powershell-5.1) to store the parameter name and input in pairs.
+Splatting variables, like normal variables, begin with a dollar sign ( `$` ), a name and an equals sign ( `=` ).
 
-Splatting variables, like normal variables begin with a dollar sign ( `$` ), a name and an equals sign ( `=` ).
+Then, I make a hash table by typing an "at" symbol ( `@` ) and curly braces ( `{}` )
 
-To make a hash table, type an at symbol ( `@` ) and curly braces ( `{}` )
-
-Inside the braces, the value pairs are added, with an equals separating the key from the value.
+Inside the braces, the value pairs are added, with an equals sign separating the key from the value.
 
 The item left of the equals sign will be the parameter name and the item on the right is the parameter input.
 
-Regular variables can be used as inputs in the hash table.
+Regular variables can be used as values in the hash table.
 
 Switch parameters' must have a value that is either `$true` or `$false`.
 
@@ -64,7 +61,7 @@ By typing the variable `$searchParams` in PowerShell, you can see the result as 
     TimeSpan                       45.00:00:00
 
 
-Once the hash table is complete, type the at sign ( `@` ) then the splatting variable name after the command.
+Once the hash table is complete, type the command followed by the "at" sign ( `@` ) then the splatting variable name.
 
     Search-ADAccount @searchParams
 
@@ -82,9 +79,6 @@ To prevent that, I will exclude the computers from the Inactive OU from the init
 The `-Property` parameter identifies the property to compare.
 
     Search-ADAccount @searchParams | Where-Object -Property
-
-
-
 
 I can compare things with a [comparison operator](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_comparison_operators?view=powershell-5.1).
 
