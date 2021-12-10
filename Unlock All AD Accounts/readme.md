@@ -1,9 +1,7 @@
-# 7 Keyboard Shortcuts for PowerShell Speed and Efficiency
-
 ## Introduction:
 This is PowerShell Breakdown One-Liners where the entire script is written in just one line.
 
-[This one](https://www.youtube.com/watch?v=cenJHwdz3Mk) finds all of the Active Directory accounts that are locked out within an Organizational Unit and then unlocks them all.
+[This one](https://www.youtube.com/watch?v=R40Xt96zMIg) finds all of the Active Directory accounts that are locked out within an Organizational Unit and then unlocks them all.
 
 This really comes in handy when _something_ causes large numbers of users to have their accounts become locked.
 
