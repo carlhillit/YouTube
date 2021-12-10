@@ -1,1 +1,0 @@
-Search-ADAccount -LockedOut -SearchBase 'OU=Users,OU=LAB,DC=breakdown,DC=LAB' | Unlock-ADAccount
